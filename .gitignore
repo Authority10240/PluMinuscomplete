@@ -1,0 +1,11 @@
+# gradle-wrapper.jar
+/.gradle
+/captures/
+# /gradlew
+# /gradlew.bat
+/local.properties
+/build/
+GeneratedPluginRegistrant.java
+/Keystore/
+/test_example/
+/.dart_tool/

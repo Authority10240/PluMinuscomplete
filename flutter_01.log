@@ -1,0 +1,50 @@
+Flutter crash report; please file at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter --no-color run --machine --track-widget-creation --device-id=emulator-5554 --start-paused lib\main.dart
+
+## exception
+
+SocketException: SocketException: Write failed (OS Error: The pipe is being closed.
+, errno = 232), port = 0
+
+```
+null```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, v1.7.8+hotfix.4, on Microsoft Windows [Version 10.0.17763.737], locale en-ZA)
+    • Flutter version 1.7.8+hotfix.4 at C:\flutter\flutter
+    • Framework revision 20e59316b8 (2 months ago), 2019-07-18 20:04:33 -0700
+    • Engine revision fee001c93f
+    • Dart version 2.4.0
+
+[!] Android toolchain - develop for Android devices (Android SDK version 28.0.3)
+    • Android SDK at C:/Users/Freedom/AppData/Local/Android/Sdk
+    • Android NDK location not configured (optional; useful for native profiling support)
+    • Platform android-28, build-tools 28.0.3
+    • ANDROID_HOME = C:/Users/Freedom/AppData/Local/Android/Sdk
+    • Java binary at: C:\Program Files\Android\Android Studio\jre\bin\java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b03)
+    ✗ Android license status unknown.
+      Try re-installing or updating your Android SDK Manager.
+      See https://developer.android.com/studio/#downloads or visit https://flutter.dev/setup/#android-setup for detailed instructions.
+
+[✓] Android Studio (version 3.5)
+    • Android Studio at C:\Program Files\Android\Android Studio
+    • Flutter plugin version 38.2.3
+    • Dart plugin version 191.8423
+    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b03)
+
+[!] VS Code, 64-bit edition (version 1.34.0)
+    • VS Code at C:\Program Files\Microsoft VS Code
+    ✗ Flutter extension not installed; install from
+      https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter
+
+[✓] Connected device (1 available)
+    • Android SDK built for x86 • emulator-5554 • android-x86 • Android 7.0 (API 24) (emulator)
+
+! Doctor found issues in 2 categories.
+```

@@ -1,0 +1,535 @@
+{
+  "project_info": {
+    "project_number": "848671982086",
+    "firebase_url": "https://edulinkdatabase.firebaseio.com",
+    "project_id": "edulinkdatabase",
+    "storage_bucket": "edulinkdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848671982086:android:ad590ac7c64e3288",
+        "android_client_info": {
+          "package_name": "com.company.elink.eduliinkguiconcept"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848671982086-fsvrqh8dfgb2a9u6s0nblgr7tkkqvrfo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.elink.eduliinkguiconcept",
+            "certificate_hash": "a15dec19bc31008fde6b468aebe2a01d402c4c06"
+          }
+        },
+        {
+          "client_id": "848671982086-hpp2bj4vuhmb6ofkto0jki5l58er3qcc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.elink.eduliinkguiconcept",
+            "certificate_hash": "216914463cac893be26f88b4ad54025fa07dfeb9"
+          }
+        },
+        {
+          "client_id": "848671982086-4pfrtnuk9aqektd5b103r28rlujpi67t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.elink.eduliinkguiconcept",
+            "certificate_hash": "4296117aed7f8b586782d044ad77336039700451"
+          }
+        },
+        {
+          "client_id": "848671982086-3c6moqpetfi9d62r0v3r3do6oc7gth0i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.elink.eduliinkguiconcept",
+            "certificate_hash": "b7697eb6bd7ebe972916604d0f1109ebe4c65927"
+          }
+        },
+        {
+          "client_id": "848671982086-kjgqllfke4afo7kg75pholsu5t42ipd4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.elink.eduliinkguiconcept",
+            "certificate_hash": "e1a76b6b67dc61c5150c566d19c2aed3508d11d8"
+          }
+        },
+        {
+          "client_id": "848671982086-68schhi93c8ftcc96br36jla8skfnmku.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.elink.eduliinkguiconcept",
+            "certificate_hash": "e860fc63d4744892b4421c1e3c15143a69d3ba01"
+          }
+        },
+        {
+          "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzxoqdmKcFUa_fQWtXI7slM1TgVHAhdWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848671982086-139tohv9crq8fir8l672f7o7igg29p39.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "entacom.qbit.entacomGuardian"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848671982086:android:a27479714acd71fb",
+        "android_client_info": {
+          "package_name": "com.example.kopano.eduliinkguiconcept"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848671982086-m55rqoc6s2dkfgof6a6cun4p0h13goar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kopano.eduliinkguiconcept",
+            "certificate_hash": "216914463cac893be26f88b4ad54025fa07dfeb9"
+          }
+        },
+        {
+          "client_id": "848671982086-dct9246aiiulmj9pfujaegod8ejd1eqm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kopano.eduliinkguiconcept",
+            "certificate_hash": "4296117aed7f8b586782d044ad77336039700451"
+          }
+        },
+        {
+          "client_id": "848671982086-lpel6peiin5ruqsagadt9r6smgl8db6b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kopano.eduliinkguiconcept",
+            "certificate_hash": "e860fc63d4744892b4421c1e3c15143a69d3ba01"
+          }
+        },
+        {
+          "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzxoqdmKcFUa_fQWtXI7slM1TgVHAhdWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848671982086-139tohv9crq8fir8l672f7o7igg29p39.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "entacom.qbit.entacomGuardian"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848671982086:android:72122584e2744ff9",
+        "android_client_info": {
+          "package_name": "com.example.kopano.edulinkstudent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848671982086-qcoru9q3qsrulusm8qlhqb5kg7t7if88.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kopano.edulinkstudent",
+            "certificate_hash": "216914463cac893be26f88b4ad54025fa07dfeb9"
+          }
+        },
+        {
+          "client_id": "848671982086-cfd0ifbsgmf0u5k70d2cukikgkk5ds4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kopano.edulinkstudent",
+            "certificate_hash": "e860fc63d4744892b4421c1e3c15143a69d3ba01"
+          }
+        },
+        {
+          "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzxoqdmKcFUa_fQWtXI7slM1TgVHAhdWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848671982086-139tohv9crq8fir8l672f7o7igg29p39.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "entacom.qbit.entacomGuardian"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848671982086:android:2a38b002f0037ddb",
+        "android_client_info": {
+          "package_name": "com.example.kopano.registationemailgmail"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzxoqdmKcFUa_fQWtXI7slM1TgVHAhdWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848671982086-139tohv9crq8fir8l672f7o7igg29p39.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "entacom.qbit.entacomGuardian"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848671982086:android:35b9d16d71e2eb81",
+        "android_client_info": {
+          "package_name": "company.parent.edulink.edulinkparent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848671982086-7rson1vvsffm9hfcc3c8stku113foulf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "company.parent.edulink.edulinkparent",
+            "certificate_hash": "216914463cac893be26f88b4ad54025fa07dfeb9"
+          }
+        },
+        {
+          "client_id": "848671982086-d7aoimltt5all3dc1ismlt922ukum1mi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "company.parent.edulink.edulinkparent",
+            "certificate_hash": "e1a76b6b67dc61c5150c566d19c2aed3508d11d8"
+          }
+        },
+        {
+          "client_id": "848671982086-eccqnpjkog8slrl4qfc3clkru14cn7me.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "company.parent.edulink.edulinkparent",
+            "certificate_hash": "4296117aed7f8b586782d044ad77336039700451"
+          }
+        },
+        {
+          "client_id": "848671982086-9kdii4of68e855ssfogrvogogdggg9at.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "company.parent.edulink.edulinkparent",
+            "certificate_hash": "e860fc63d4744892b4421c1e3c15143a69d3ba01"
+          }
+        },
+        {
+          "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzxoqdmKcFUa_fQWtXI7slM1TgVHAhdWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848671982086-139tohv9crq8fir8l672f7o7igg29p39.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "entacom.qbit.entacomGuardian"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848671982086:android:245d273f8381bbc1",
+        "android_client_info": {
+          "package_name": "company.student.edulink.edulinkstudent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848671982086-7q0ni11396mre4i13grdchhd6tjvoe5l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "company.student.edulink.edulinkstudent",
+            "certificate_hash": "a15dec19bc31008fde6b468aebe2a01d402c4c06"
+          }
+        },
+        {
+          "client_id": "848671982086-gjb707rhdbtgb1jkvv4qtcuck7sd3gfo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "company.student.edulink.edulinkstudent",
+            "certificate_hash": "216914463cac893be26f88b4ad54025fa07dfeb9"
+          }
+        },
+        {
+          "client_id": "848671982086-f3e93t7f6rqorika914216b641bgm237.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "company.student.edulink.edulinkstudent",
+            "certificate_hash": "e860fc63d4744892b4421c1e3c15143a69d3ba01"
+          }
+        },
+        {
+          "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzxoqdmKcFUa_fQWtXI7slM1TgVHAhdWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848671982086-139tohv9crq8fir8l672f7o7igg29p39.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "entacom.qbit.entacomGuardian"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848671982086:android:152af41b8971011e",
+        "android_client_info": {
+          "package_name": "elink.qubit.pty.eduliinkguiconcept"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848671982086-p3ut4ebkdosdgjfl987m991hj1u7o2sj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "elink.qubit.pty.eduliinkguiconcept",
+            "certificate_hash": "4296117aed7f8b586782d044ad77336039700451"
+          }
+        },
+        {
+          "client_id": "848671982086-ecadn078pbkhko2uo95cir0aphin7qi6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "elink.qubit.pty.eduliinkguiconcept",
+            "certificate_hash": "e1a76b6b67dc61c5150c566d19c2aed3508d11d8"
+          }
+        },
+        {
+          "client_id": "848671982086-oi2i9tjurvu0pme4l5n939fb0frfde2m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "elink.qubit.pty.eduliinkguiconcept",
+            "certificate_hash": "9f05c26e54725e443450ec5ad20ad4fcf3075ef1"
+          }
+        },
+        {
+          "client_id": "848671982086-77gfplcqicidd4vgcp6grr2o8b3bv0qo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "elink.qubit.pty.eduliinkguiconcept",
+            "certificate_hash": "e860fc63d4744892b4421c1e3c15143a69d3ba01"
+          }
+        },
+        {
+          "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzxoqdmKcFUa_fQWtXI7slM1TgVHAhdWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848671982086-139tohv9crq8fir8l672f7o7igg29p39.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "entacom.qbit.entacomGuardian"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848671982086:android:a5924f688577b47f",
+        "android_client_info": {
+          "package_name": "entacom.qbit.guardian_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848671982086-13300smur20of2b4fnhk06rhtmlcd1pf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "entacom.qbit.guardian_app",
+            "certificate_hash": "e6c024f44e516b18c645c8a2d2448c31e6a92eec"
+          }
+        },
+        {
+          "client_id": "848671982086-356a037tjfii1ob0jmjolk74tf5slnvo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "entacom.qbit.guardian_app",
+            "certificate_hash": "e860fc63d4744892b4421c1e3c15143a69d3ba01"
+          }
+        },
+        {
+          "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzxoqdmKcFUa_fQWtXI7slM1TgVHAhdWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848671982086-139tohv9crq8fir8l672f7o7igg29p39.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "entacom.qbit.entacomGuardian"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848671982086:android:ba70db1f2df918fc",
+        "android_client_info": {
+          "package_name": "qubit.entacom.educator_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848671982086-42ia6kou044kp3c7839berai1m20grgp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "qubit.entacom.educator_app",
+            "certificate_hash": "ea2d35c9f8957720b6895db5efa6fb50c6710cdc"
+          }
+        },
+        {
+          "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzxoqdmKcFUa_fQWtXI7slM1TgVHAhdWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848671982086-ejnc1lugt4960u9fufqlmtbtdgoktvgu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848671982086-139tohv9crq8fir8l672f7o7igg29p39.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "entacom.qbit.entacomGuardian"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

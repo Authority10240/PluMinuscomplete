@@ -1,0 +1,57 @@
+buildscript {
+    ext.kotlin_version = '1.4.10'
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.google.gms:google-services:3.2.1'
+        classpath 'com.android.support:support-annotations:25.0.0'// Google Services plugin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+
+
+subprojects {
+    project.configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'com.android.support'
+                    && !details.requested.name.contains('multidex') ) {
+                details.useVersion "27.1.1"
+            }
+            if (details.requested.group == 'androidx.core'
+                    && !details.requested.name.contains('androidx') ) {
+                details.useVersion "1.0.1"
+            }
+        }
+    }
+}
+
+
+
+allprojects {
+    repositories {
+        google()
+        maven {
+            url "https://maven2.google.com"
+        }
+        jcenter()
+    }
+
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
