@@ -80,7 +80,7 @@ class _EmptyState extends State<Empty> with TickerProviderStateMixin {
                         if (await didAuthenticate) {
                           Navigator.pop(context);
                           Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => new BalanceYear(),),);
+                            builder: (context) => new BalanceYear(transaction: false,),),);
                         } else {
                           loadKeyPad(context);
                         }
@@ -97,7 +97,7 @@ class _EmptyState extends State<Empty> with TickerProviderStateMixin {
                             useErrorDialogs: false);
                         if (await didAuthenticate) {
                           Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => new BalanceYear(),),);
+                            builder: (context) => new BalanceYear(transaction: false,),),);
                         } else {
                           loadKeyPad(context);
                         }
@@ -426,7 +426,7 @@ loadKeyPad(BuildContext context){
             SharedPreferences.getInstance().then((value)  {
               if(value.getString("PIN") == pin){
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => new BalanceYear() ,),);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => new BalanceYear(transaction: false,) ,),);
               }else{
                 Fluttertoast.showToast(msg: 'Invalid Pin, Please check your pin and try again');
               }
@@ -436,9 +436,7 @@ loadKeyPad(BuildContext context){
          );
     });
 }
-lockpin(){
 
-}
 
   loadPicture(BuildContext context, String title, String description, String type) {
     return showDialog(

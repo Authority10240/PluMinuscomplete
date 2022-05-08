@@ -6,13 +6,24 @@ import 'package:treva_shop_flutter/UI/HomeUIComponent/BalanceMonth.dart';
 import 'dart:async';
 class BalanceYear extends StatefulWidget {
   @override
-  _BalanceYearState createState() => _BalanceYearState();
+  _BalanceYearState createState() => _BalanceYearState(transaction: this.transaction);
+
+  bool transaction;
+  int type;
+  BalanceYear( {this.transaction = false, this.type} );
+
+
 }
 
 class _BalanceYearState extends State<BalanceYear> {
   List<String> year ;
+  bool transaction;
+  int type;
+  _BalanceYearState({this.transaction = false, this.type });
   @override
   Widget build(BuildContext context) {
+
+
 
     if(year == null){
       year = List();
@@ -35,7 +46,7 @@ class _BalanceYearState extends State<BalanceYear> {
           leading: CircleAvatar(child: Text(year[pos][2]+year[pos][3], style: TextStyle(color: Colors.white),),backgroundColor: Colors.grey,),
           title: Text(year[pos]),
           onTap: (){
-            Navigator.push(context,  MaterialPageRoute(builder: (context) => new BalanceMonth(year[pos]),));
+            Navigator.push(context,  MaterialPageRoute(builder: (context) => new BalanceMonth(year[pos], transaction: this.transaction,),));
           },
         ),
       );

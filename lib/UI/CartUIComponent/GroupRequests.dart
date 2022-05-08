@@ -189,13 +189,14 @@ class _Group_requestsState extends State<Group_requests> {
                   'ACTUAL_AMOUNT_DATE': getDate()});
                   refUser.child(req.Title).child('INFORMATION').update({'ACTUAL_AMOUNT':value,
                     'ACTUAL_AMOUNT_DATE': getDate()});
-
                 },
               ),
             FlatButton(onPressed: (){
+
               saveInHistory(req,"F");
               UpdateStatus(req);
               updateActualAmount(req);
+              updateBalance(req, "${double.parse(req.AVAILABLE_BALANCE) - double.parse(req.ACTUAL_AMOUNT)}",minus: true);
               Navigator.pop(context);
               setState(() {
               });
@@ -218,8 +219,7 @@ class _Group_requestsState extends State<Group_requests> {
     req.TRANSACTION_TYPE = TT;
     DatabaseReference backup = FirebaseDatabase.instance.reference()
         .child('THIS_COMPANY').child('STATEMENTS').child(StaticValues.splitEmailForFirebase(StaticValues.employeeNumber))
-        .child(req.YEAR).child(req.MONTH).child(refernce).child(StaticValues.splitEmailForFirebase(getDateTime()+req.REQUEST_ID))
-        ;
+        .child(req.YEAR).child(req.MONTH).child(refernce).child(StaticValues.splitEmailForFirebase(getDateTime()+req.REQUEST_ID));
     backup.set(req.toMap());
 
    /* backup = FirebaseDatabase.instance.reference()
@@ -336,6 +336,7 @@ class _Group_requestsState extends State<Group_requests> {
                           ShowToast("Request Approved");
                           updateResponse('APPROVED', list);
 
+
                         }else{
                           Navigator.pop(context);
                           addMoreMoney(list);
@@ -429,7 +430,6 @@ class _Group_requestsState extends State<Group_requests> {
             if((double.parse(amount) + double.parse(list.AVAILABLE_BALANCE)) > getTotal(list) ){
               list.ACTUAL_AMOUNT = amount;
               updateBalance(list, amount);
-              saveInHistory(list,"A");
 
             }else{
               Fluttertoast.showToast(
@@ -469,20 +469,32 @@ class _Group_requestsState extends State<Group_requests> {
     });
   }
 
-    updateBalance(Request list, String entered){
+    updateBalance(Request list, String entered, {bool minus : false}){
     DatabaseReference refMain = FirebaseDatabase.instance.reference().child('THIS_COMPANY')
         .child('GROUPS').child(StaticValues.splitEmailForFirebase(list.GROUP_ADMIN)).child(list.GROUP_NAME).child(list.DEPARTMENT).child('BANK_MODEL');
       refMain.update({
-        'ACCOUNT_BALANCE': (double.parse(entered) + double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
+        'ACCOUNT_BALANCE': minus?
+        (double.parse(entered) - double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
+            :
+        (double.parse(entered) + double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
       });
       ref.child(list.Title).child('INFORMATION').update({
-        'ACCOUNT_BALANCE': (double.parse(entered) + double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
+        'ACCOUNT_BALANCE': minus?
+        (double.parse(entered) - double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
+            :
+        (double.parse(entered) + double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
         ,'ACTUAL_AMOUNT_PAID':double.parse(entered).toStringAsFixed(2)});
       refUser.child(list.Title).child('INFORMATION').update({
-        'ACCOUNT_BALANCE': (double.parse(entered) + double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
+        'ACCOUNT_BALANCE': minus ?
+        (double.parse(entered) - double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
+          :(double.parse(entered) + double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
         ,'ACTUAL_AMOUNT_PAID':double.parse(entered).toStringAsFixed(2)});
-
-      saveInHistory(list,"F");
+        list.ACTUAL_AMOUNT_PAID = double.parse(entered).toStringAsFixed(2);
+        list.AVAILABLE_BALANCE = minus?
+        (double.parse(entered) - double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
+          :
+        (double.parse(entered) + double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2);
+      saveInHistory(list,"A");
       setState(() {
         Navigator.pop(context);
         uploadOption(list);

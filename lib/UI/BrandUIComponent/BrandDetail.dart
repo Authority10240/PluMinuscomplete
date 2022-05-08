@@ -668,22 +668,26 @@ class _brandDetailState extends State<brandDetail> {
 
 
   updateListView(GROUP_INFORMATION gi){
-
     if(type == 0){
       // if we are dealing with transactions going in. current users personall requests.
       refUser = FirebaseDatabase.instance.reference().child('THIS_COMPANY').child(
           'PERSONAL_REQUESTS').child(StaticValues.splitEmailForFirebase(StaticValues.employeeNumber))
+          .child(gi.GROUP_NAME).child(gi.DEPARTMENT);
+    }else if (type == 1){
+      refUser = FirebaseDatabase.instance.reference().child('THIS_COMPANY').child(
+          'GROUP_REQUESTS').child(StaticValues.splitEmailForFirebase(gi.GROUP_ADMIN))
           .child(gi.GROUP_NAME).child(gi.DEPARTMENT);
     }else{
       refUser = FirebaseDatabase.instance.reference().child('THIS_COMPANY').child(
           'GROUP_REQUESTS').child(StaticValues.splitEmailForFirebase(gi.GROUP_ADMIN))
           .child(gi.GROUP_NAME).child(gi.DEPARTMENT);
     }
-
+      var list = [];
     refUser.onChildAdded.listen((data){
-      var list = data.snapshot.value;
-
-      Request re =Request.FromMap(data.snapshot.key, list,'T');
+      if( type == 2){
+         list = data.snapshot.value;
+      }
+      Request re =Request.FromMap(data.snapshot.key,list,'T');
       re.GROUP_ADMIN = gi.GROUP_ADMIN;
       re.GROUP_NAME = gi.GROUP_NAME;
       re.DEPARTMENT = gi.DEPARTMENT;

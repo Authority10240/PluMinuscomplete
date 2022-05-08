@@ -20,10 +20,12 @@ import 'package:pdf/widgets.dart' as pw;
 
 class BalanceSheet extends StatefulWidget {
   @override
-  _BalanceSheetState createState() => _BalanceSheetState( year,  month, card, name , department);
-  BalanceSheet( this.year, this.month, this.card, this.name, this.department);
-
+  _BalanceSheetState createState() => _BalanceSheetState( year,  month, card, name , department, transaction: this.transaction);
+  BalanceSheet( this.year, this.month, this.card, this.name, this.department,
+      {this.transaction , this.type});
+  int type;
   String year="", month="" , card = "", department="", name="" , date = "";
+  bool transaction;
 
 }
 
@@ -39,6 +41,7 @@ class _BalanceSheetState extends State<BalanceSheet> {
   DBHelper dbHelper = DBHelper();
   List<GROUP_INFORMATION> groups = List() ;
   DatabaseReference ref, refUser, refUser2;
+  bool transaction;
   var pdf = pw.Document();
   Widget build(BuildContext context) {
 
@@ -65,7 +68,9 @@ class _BalanceSheetState extends State<BalanceSheet> {
       ),
 
 
-      body: ListView(children: <Widget>[Container
+      body: ListView(children: <Widget>[
+
+        Container
       (
     child: Column(
     children: <Widget>[
@@ -144,6 +149,7 @@ class _BalanceSheetState extends State<BalanceSheet> {
     SizedBox(height: MediaQuery.of(context).size.height/100,),
     FlatButton(color: Colors.grey,
       child: Text('Add Amount',
+
         style: TextStyle(color: Colors.black),),
       onPressed: (){
       if(DateTime.now().month.toString() == month ) {
@@ -188,25 +194,7 @@ class _BalanceSheetState extends State<BalanceSheet> {
     ),
     ],
     ),
-      Container(padding:EdgeInsets.only(left: 10, right: 10),height: 400,child:ListView(
-        children: <Widget>[
-          Table(
-            children: [
-              TableRow(
-                  children: [
-                    Text('Date', textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.bold),),
-                    Text('Transaction',  textAlign: TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold),),
-                    Text('Amount',  textAlign: TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold),),
-                    Text('Balance',  textAlign: TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold),),
-                    Text('Completed By' , textAlign: TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold),),
-                  ]
-              ),
-
-            ],
-          ),
-          Table(children: getTableRows(),)
-        ],
-      ) ),
+      Container(padding:EdgeInsets.only(left: 10, right: 10),height: 400,child:getTableRows(), ),
 
     Row(
     children: <Widget>[
@@ -219,15 +207,14 @@ class _BalanceSheetState extends State<BalanceSheet> {
     children: <Widget>[
       Container(
         child: Center(
-          child: Text('Closing Balance: R${totalAmount.toStringAsFixed(2)}.', style: TextStyle(fontWeight: FontWeight.bold),),
+          child: Text('Closing Balance: R${request!= null && request.isNotEmpty
+              ? request[request.length-1].AVAILABLE_BALANCE
+              : 0.00}.', style: TextStyle(fontWeight: FontWeight.bold),),
         ),
       ),
     SizedBox(height: 5,),
-    Container( width: MediaQuery.of(context).size.width-15,
-    child:Center(
-    child: Text('Note: To view reconciled/unreconciled invoices and receipts as per transaction double tap on the'
-    ' bolded amounts.',textAlign: TextAlign.center,),) ,
-    )
+
+
     ],
     )
     ],
@@ -240,14 +227,12 @@ class _BalanceSheetState extends State<BalanceSheet> {
 
   addBankingFee(Request req){
     if(DateTime.now().month.toString() == month) {
-
       DatabaseReference refFee = FirebaseDatabase.instance.reference().child(
           "THIS_COMPANY").child("STATEMENTS").child(
           StaticValues.splitEmailForFirebase(StaticValues.employeeNumber))
           .child(year).child(month).child('${card}_${department}_${name}');
       refFee.child(getDateTime()+req.Title).set(req.toMap());
       setState(() {
-
       });
     }else{
       Fluttertoast.showToast(
@@ -276,11 +261,12 @@ class _BalanceSheetState extends State<BalanceSheet> {
         EdgeInsets.only(left: 20.0, right: 30.0, top: 0.0, bottom: 0.0),
         child: Theme(
           data: ThemeData(
-            hintColor: Colors.transparent,
+            hintColor: Colors.grey,
           ),
           child: TextField(
             decoration: InputDecoration(
                 border: InputBorder.none,
+                label: Text(name),
                 labelStyle: TextStyle(
                     fontSize: 15.0,
                     letterSpacing: 0.3,
@@ -346,7 +332,6 @@ class _BalanceSheetState extends State<BalanceSheet> {
                     req.date = getDate();
                     addBankingFee(req);
                     Navigator.pop(context);
-
                 },
               ),
               FlatButton(
@@ -452,139 +437,71 @@ class _BalanceSheetState extends State<BalanceSheet> {
 
     return datalist;
   }
-List<TableRow> getTableRows(){
+ListView getTableRows(){
 
       double totalToShow = 0.00,
-          balanceToShow = 0.00;
+          balanceToShow = 0.00,
+      amount = 0.00;
       totalVat = 0.00;
       totalAmount = 0.00;
       total = 0.00;
-      List<TableRow> tbl = List();
+    return ListView.builder(
+        padding: EdgeInsets.all(5),
+        itemCount: request.length,
+        itemBuilder: (BuildContext context, int index ){
+          int reverseIndex = index;
 
-      for (int i = 0 ; i < request.length; i++) {
-        if (request[i].TRANSACTION_TYPE == 'F' ||
-            request[i].TRANSACTION_TYPE == 'A') {
-          amount = double.parse(request[i].ACTUAL_AMOUNT);
-        } else {
-          amount = double.parse(request[i].REQUESTED_AMOUNT);
-        }
-        if (request[i].REQUESTER != StaticValues.employeeNumber) {
-          amount = amount * -1;
-        }
-        if (request[i].TRANSACTION_TYPE == 'F') {
-          amount = amount * -1;
-        }
-        totalAmount = totalAmount + amount;
-        try {
-          totalVat = totalVat + double.parse(request[i].REQUEST_VAT);
-        } catch (E) {
-          totalVat = totalVat;
-        }
-        balance = balance + amount;
-
-        if (request[i].TRANSACTION_TYPE == 'R') {
-          //money that came into the account
-          try {
-            tbl.add(TableRow(
-                children: [
-                  Text('${request[i].date}'),
-                  Text('${request[i].Title} '),
-                  GestureDetector(onDoubleTap: () {
-                    Share.share(request[i].proofOfPaynent,
-                        subject: 'Plus Minus: ${request[i]
-                            .Title}\'s Deposit Slip');
-                  },
-                    child: Text(
-                      'R' + double.parse(request[i].ACTUAL_AMOUNT_PAID)
-                          .toStringAsFixed(2),
-                      style: TextStyle(fontWeight: FontWeight.bold),),),
-
-                  Text('R' + totalAmount.toStringAsFixed(2)),
-                  Text(request[i].REQUESTER)
-                ]
-            ));
-
-            //money spent from the account.
-            tbl.add(TableRow(
-                children: [
-                  Text('${request[i].date}'),
-                  Text('${request[i].Title} '),
-                  GestureDetector(child: Text(
-                    '- R${double.parse(request[i].ACTUAL_AMOUNT)
-                        .toStringAsFixed(
-                        2)}', style: TextStyle(fontWeight: FontWeight.bold),),
-                    onDoubleTap: () {
-                      Share.share(request[i].proofOfPurchase,
-                          subject: 'Plus Minus: ${request[i]
-                              .Title}\'s Deposit Slip');
-                    },),
-
-                  Text('R${minusAmount(i)}'),
-                  Text(request[i].REQUESTER)
-                ]
-
-            ));
-          }catch(e){
-
+          if(request[reverseIndex].TRANSACTION_TYPE == "A") {
+            amount = double.parse(request[reverseIndex].ACTUAL_AMOUNT_PAID);
+          }else if(request[reverseIndex].TRANSACTION_TYPE == "F") {
+            amount = double.parse(request[reverseIndex].ACTUAL_AMOUNT);
           }
-        } else if (request[i].TRANSACTION_TYPE == 'F') {
-          try {
-            tbl.add(TableRow(
-                children: [
-                  Text('${request[i].date}'),
-                  Text('${request[i].Title} '),
-                  GestureDetector(
-                    child: Text(
-                      '- R${double.parse(request[i].ACTUAL_AMOUNT)
-                          .toStringAsFixed(
-                          2)}',),
-                    onDoubleTap: () {
-                      Share.share(request[i].proofOfPurchase,
-                          subject: 'Plus Minus: ${request[i]
-                              .Title}\'s Proof Of Purchase');
-                    },),
+          if(request[reverseIndex].TRANSACTION_TYPE == "A") {
+            return this.transaction == false? Card(child: ListTile(
+              title: Text("Transaction:${request[reverseIndex].Title}",
+                style: TextStyle(fontSize: 12),),
+              trailing: Text("Date:${request[reverseIndex].date} \n"
+                  "Available amount: R${request[reverseIndex].AVAILABLE_BALANCE}",
+                  style: TextStyle(fontSize: 12)),
+              subtitle: Text("R${amount}0", style: TextStyle(fontSize: 12)),
+            )): Card(child: ListTile(
+              leading: Text("Date \n${request[reverseIndex].date}"),
+              title: Text("Transaction \n${request[reverseIndex].Title}"),
+              trailing: FlatButton( onPressed: ()=> downloadFile(request[reverseIndex].proofOfPaynent,
+                  "${request[reverseIndex].Title} - ${request[reverseIndex].date}")  ,child: Card(child:  Container(padding: EdgeInsets.all(10),child: Text("Download Reciept")),)),),
+            );
+          }else{
 
-                  Text('R${totalAmount}'),
-                  Text(request[i].REQUESTER)
-                ]
-            ));
-            updateActualAmount(request[i]);
-          }catch(e){
+            return  this.transaction == false ? Card(child: ListTile(
+              title: Text("Transaction:${request[reverseIndex].Title}",
+                style: TextStyle(fontSize: 12),),
+              trailing: Text("Date:${request[reverseIndex].date} \n"
+                  "Available amount: R${request[reverseIndex].AVAILABLE_BALANCE}"
+                  ,
+                  style: TextStyle(fontSize: 12)),
+              subtitle: Text("-R${amount}0", style: TextStyle(fontSize: 12)),
 
+            )) :Card(child: ListTile(
+              leading: Text("Date \n${request[reverseIndex].date}"),
+              title: Text("Transaction \n${request[reverseIndex].Title}"),
+              trailing: FlatButton(onPressed:()=> downloadFile(request[reverseIndex].proofOfPaynent ,
+                  "${request[reverseIndex].Title} - ${request[reverseIndex].date}"
+              ), child: Card(child:  Container(padding: EdgeInsets.all(10),child: Text("Download P.O.P")),)),),
+            );
           }
-        } else if (request[i].TRANSACTION_TYPE == 'A') {
-          try {
-            tbl.add(TableRow(
-                children: [
-                  Text('${getCorrectDate(request[i])}'),
-                  Text('${request[i].Title} '),
-                 GestureDetector(child: Text(
-                    'R${double.parse(request[i].ACTUAL_AMOUNT).toStringAsFixed(
-                        2)}',style: TextStyle(fontWeight: FontWeight.bold) ,),
-                 onDoubleTap: (){
-                   Share.share(request[i].proofOfPurchase,
-                       subject: 'Plus Minus: ${request[i]
-                           .Title}\'s Proof Of Purchase');
-                 },),
-                  Text('R${totalAmount.toStringAsFixed(2)}'),
-                  Text(request[i].REQUESTER)
-                ]
-            ));
-            updateActualAmount(request[i]);
-          }catch(e){
+        },);
+}
 
-          }
-        }
-      }
-
-
-
-
-
-
-    return tbl;
+downloadFile(String url, String name){
+    if(url != null && url != "") {
+      Share.share(url, subject: name);
+    }else{
+      Fluttertoast.showToast(msg: 'Transaction has no document. ');
+    }
 
 }
+
+
 
 String getCorrectDate(Request req){
 
@@ -652,12 +569,12 @@ CreateCSVFile() async{
 
     // add the heading to the CSV
     row.add('Date');
-    row.add('Reference');
-    row.add('Deposit');
-    row.add('Cost');
-    row.add('Proof Of Payment');
-    row.add('Proof Of Purchase');
-    row.add('Requester');
+    row.add('Transaction'); // was reference
+    row.add('Amount'); // was deposit
+    row.add('Balance');//was cost
+
+    //row.add('Proof Of Purchase');
+    //row.add('Requester');
     rows.add(row);
     //adding the headings
     double amount = 0.00,
@@ -667,21 +584,18 @@ CreateCSVFile() async{
     for (int i = 0 ; i < request.length; i++) {
       totalAmount = 0.00;
       row = List();
-      for (int j = 0; j < request[i].items.length; j++) {
-        amount = (request[i].items[j].quantity * request[i].items[j].price);
-        if (request[i].GROUP_ADMIN != StaticValues.employeeNumber) {
-          amount = amount * -1;
-        }
-        totalAmount = totalAmount + amount;
-        balance = balance + amount;
-      }
-      row.add(request[i].date);
+
+        request[i].TRANSACTION_TYPE == 'A'?
+          amount = double.parse(request[i].ACTUAL_AMOUNT)
+        :
+          amount = double.parse(request[i].ACTUAL_AMOUNT_PAID);
+
+      row.add(request[i].ACTUAL_AMOUNT_DATE);
       row.add(request[i].Title);
-      row.add(request[i].ACTUAL_AMOUNT_PAID);
-      row.add(request[i].ACTUAL_AMOUNT);
-      row.add(request[i].proofOfPaynent);
-      row.add(request[i].proofOfPurchase);
-      row.add(request[i].REQUESTER);
+      row.add(amount.toString());
+      row.add(request[i].AVAILABLE_BALANCE);
+    //  row.add(request[i].proofOfPurchase);
+     // row.add(request[i].REQUESTER);
 
       rows.add(row);
     }
@@ -689,10 +603,10 @@ CreateCSVFile() async{
 
 //store file in documents folder
 
-   // String dir = (await getExternalStorageDirectory()).absolute.path +
-        "/PlusMinus/Balance Sheets/";
+    //String dir = (await getExternalStorageDirectory()).absolute.path +
+      //  "/PlusMinus/Balance Sheets/";
     //File f = new File(
-     //   dir + "${StaticValues.employeeNumber}_${getDateTime()}.csv");
+      //  dir + "${StaticValues.employeeNumber}_${getDateTime()}.csv");
     //f.create();
 // convert rows to String and write as csv file
     String csv = const ListToCsvConverter().convert(rows);
@@ -782,7 +696,7 @@ total = 0;
     return total.toStringAsFixed(2);
   }
 
-  _BalanceSheetState(this.year, this.month, this.card, this.name, this.department);
+  _BalanceSheetState(this.year, this.month, this.card, this.name, this.department, {this.transaction });
 
   String getMonthName(String month){
     String newMonth = "";
@@ -847,7 +761,6 @@ total = 0;
                 pw.Container(child:pw.Text('Transaction', style: pw.TextStyle(fontWeight: pw.FontWeight.bold,fontSize: 11))),
                 pw.Container(child:pw.Text('Amount', style: pw.TextStyle(fontWeight: pw.FontWeight.bold,fontSize: 11))),
                 pw.Container(child:pw.Text('Balance', style: pw.TextStyle(fontWeight: pw.FontWeight.bold,fontSize: 11))),
-                pw.Container(child:pw.Text('Completed', style: pw.TextStyle(fontWeight: pw.FontWeight.bold,fontSize: 11),maxLines:5))
     ]),
 
     ])),
@@ -869,116 +782,27 @@ total = 0;
   List<pw.TableRow> getData(){
     List<pw.TableRow>  tbl = [];
 
+    for (int i = 0  ; i < request.length; i++) {
+      request[i].TRANSACTION_TYPE == 'A' ?
+      amount = double.parse(request[i].ACTUAL_AMOUNT)
+          :
+      amount = double.parse(request[i].ACTUAL_AMOUNT_PAID);
+      tbl.add(pw.TableRow(
+          children: [
+            pw.Text('${request[i].date}', style: pw.TextStyle(fontSize: 10)),
+            pw.Text('${request[i].Title} ', style: pw.TextStyle(fontSize: 10)),
 
-    double totalToShow = 0.00,
-        balanceToShow = 0.00;
-    totalVat = 0.00;
-    totalAmount = 0.00;
-    total = 0.00;
+            pw.Text(
+              'R' + double.parse(amount.toString())
+                  .toStringAsFixed(2),
+              style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold, fontSize: 10),),
 
-
-    for (int i = request.length -1 ; i > -1; i--) {
-      if (request[i].TRANSACTION_TYPE == 'F' ||
-          request[i].TRANSACTION_TYPE == 'A') {
-        amount = double.parse(request[i].ACTUAL_AMOUNT);
-      } else {
-        amount = double.parse(request[i].REQUESTED_AMOUNT);
-      }
-      if (request[i].REQUESTER != StaticValues.employeeNumber) {
-        amount = amount * -1;
-      }
-      if (request[i].TRANSACTION_TYPE == 'F') {
-        amount = amount * -1;
-      }
-      totalAmount = totalAmount + amount;
-      try {
-        totalVat = totalVat + double.parse(request[i].REQUEST_VAT);
-      } catch (E) {
-        totalVat = totalVat;
-      }
-      balance = balance + amount;
-
-      if (request[i].TRANSACTION_TYPE == 'R') {
-        //money that came into the account
-        try {
-          tbl.add(pw.TableRow(
-              children: [
-                pw.Text('${request[i].date}', style: pw.TextStyle(fontSize: 10)),
-                pw.Text('${request[i].Title} ' ,  style: pw.TextStyle(fontSize: 10)),
-
-                pw.Text(
-                    'R' + double.parse(request[i].ACTUAL_AMOUNT_PAID)
-                        .toStringAsFixed(2),
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold , fontSize: 10),),
-
-                pw.Text('R' + totalAmount.toStringAsFixed(2), style: pw.TextStyle(fontSize: 10)),
-                pw.Text(request[i].REQUESTER, style: pw.TextStyle(fontSize: 10))
-              ]
-          ));
-
-          //money spent from the account.
-          tbl.add(pw.TableRow(
-              children: [
-                pw.Text('${request[i].ACTUAL_AMOUNT_DATE}'),
-                pw.Text('${request[i].Title} '),
-                pw.Text('- R${double.parse(getCorrectDate(request[i])).toStringAsFixed(2)}', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                pw.Text('R${minusAmount(i)}'),
-                pw.Text(request[i].REQUESTER)
-              ]
-
-          ));
-        }catch(e){
-
-        }
-      } else if (request[i].TRANSACTION_TYPE == 'F') {
-        try {
-          tbl.add(pw.TableRow(
-              children: [
-                pw.Text('${request[i].ACTUAL_AMOUNT_DATE}'),
-                 pw.Text('${request[i].Title} '),
-                pw.Text(
-                  '- R${double.parse(getCorrectDate(request[i]))
-                      .toStringAsFixed(
-                      2)}',),
-                pw.Text('R${totalAmount}'),
-                pw.Text(request[i].REQUESTER)
-              ]
-          ));
-          updateActualAmount(request[i]);
-        }catch(e){
-
-        }
-      } else if (request[i].TRANSACTION_TYPE == 'A') {
-        try {
-          tbl.add(pw.TableRow(
-              children: [
-                pw.Text('${request[i].ACTUAL_AMOUNT_DATE}'),
-                pw.Text('${request[i].Title} '),
-                pw.Text(
-                  'R${double.parse(getCorrectDate(request[i])).toStringAsFixed(
-                      2)}',),
-                pw.Text('R${totalAmount.toStringAsFixed(2)}'),
-                pw.Text(request[i].REQUESTER)
-              ]
-          ));
-          updateActualAmount(request[i]);
-        }catch(e){
-
-        }
-      }
+            pw.Text('R${request[i].AVAILABLE_BALANCE}'),
+          ]
+      ));
+      //add columns to table
     }
-
-
-
-
-
-
     return tbl;
-
-
-    //add columns to table
-
-
-
   }
 }

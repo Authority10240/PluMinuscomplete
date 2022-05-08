@@ -9,16 +9,19 @@ import 'BalanceTable.dart';
 
 class BalanceMonth extends StatefulWidget {
   @override
-  _BalanceMonthState createState() => _BalanceMonthState(year);
-  BalanceMonth(this.year);
+  _BalanceMonthState createState() => _BalanceMonthState(year, transaction: this.transaction );
+  bool transaction;
+  int type;
+  BalanceMonth(this.year , {this.transaction, this.type});
   String year ="";
 }
 
 class _BalanceMonthState extends State<BalanceMonth> {
   List<String> months;
   String year = "";
-
-  _BalanceMonthState(this.year);
+  int type;
+bool transaction ;
+  _BalanceMonthState(this.year , {this.transaction, this.type} );
   @override
   Widget build(BuildContext context) {
     if(months == null){
@@ -35,7 +38,7 @@ class _BalanceMonthState extends State<BalanceMonth> {
           leading: CircleAvatar(child: Text(months[pos],style: TextStyle(color: Colors.white),),backgroundColor: Colors.grey,),
           title: Text(getMonthName(months[pos])) ,
           onTap: (){
-            Navigator.push(context,  MaterialPageRoute(builder: (context) => new BalanceCard(year,months[pos])));
+            Navigator.push(context,  MaterialPageRoute(builder: (context) => new BalanceCard(year,months[pos], transaction: this.transaction,)));
           },
         ),);
       },),

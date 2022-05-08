@@ -46,6 +46,7 @@ class _cartState extends State<cart> {
     if(groups2 == null){
 
       groups2 = List();
+      getGroupListOnline();
       getGroupsFromSQL();
 
       try{
@@ -424,8 +425,49 @@ class _cartState extends State<cart> {
     return color;
     }
 
+    getGroupListOnline(){
+      ref = FirebaseDatabase.instance.reference().child('THIS_COMPANY')
+          .child('GROUPS').child(StaticValues.splitEmailForFirebase(StaticValues.employeeNumber));
+
+
+
+
+      ref.onChildAdded.listen((event) {
+
+        ref2 = FirebaseDatabase.instance.reference().child('THIS_COMPANY')
+            .child('GROUPS').child(StaticValues.splitEmailForFirebase(StaticValues.employeeNumber))
+        .child(event.snapshot.key);
+
+
+        ref2.onChildAdded.listen((event) {
+
+          var data = event.snapshot.value;
+
+
+            BankModel bank = BankModel.fromMapObject(data['BANK_MODEL']);
+            MemberModel admin = MemberModel.fromMapObjectI(data['ADMIN_MODEL']);
+            GroupModel group = GroupModel.fromMapObject(data['GROUP_MODEL']);
+            if (groups2.contains(
+                GROUP_INFORMATION.fullGroup(group, bank, admin))) {
+
+            } else {
+              groups2.add(GROUP_INFORMATION.fullGroup(group, bank, admin));
+            }
+
+          setState(() {
+            if(loop == true) {
+              Navigator.pop(context);
+              loop = false;
+            }
+          });
+        });
+      });
+
+    }
+
     updateListView(GROUP_INFORMATION group){
-      ref = FirebaseDatabase.instance.reference().child('THIS_COMPANY').child('GROUPS').child(StaticValues.splitEmailForFirebase(group.GROUP_ADMIN))
+      ref = FirebaseDatabase.instance.reference().child('THIS_COMPANY')
+          .child('GROUPS').child(StaticValues.splitEmailForFirebase(group.GROUP_ADMIN))
           .child(group.GROUP_NAME);
 
 
@@ -439,7 +481,6 @@ class _cartState extends State<cart> {
 
         }else{
         groups2.add(GROUP_INFORMATION.fullGroup(group, bank, admin));
-
         }
       setState(() {
         if(loop == true) {

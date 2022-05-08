@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:treva_shop_flutter/UI/BrandUIComponent/BrandDetail.dart';
 import 'package:treva_shop_flutter/ListItem/BrandDataList.dart';
+import 'package:treva_shop_flutter/UI/HomeUIComponent/BalanceYear.dart';
 import 'package:treva_shop_flutter/UI/HomeUIComponent/Search.dart';
 
 class brand extends StatefulWidget {
@@ -18,7 +19,7 @@ class _brandState extends State<brand> {
       title: Padding(
         padding: const EdgeInsets.only(left: 10.0),
         child: Text(
-          "Manage Transactions",
+          "",
           style: TextStyle(
               fontFamily: "Gotik",
               fontSize: 20.0,
@@ -91,7 +92,7 @@ class itemCard extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             PageRouteBuilder(
-                pageBuilder: (_, __, ___) => new brandDetail(brand,type),
+                pageBuilder: (_, __, ___) => new BalanceYear(transaction: true,),
                 transitionDuration: Duration(milliseconds: 600),
                 transitionsBuilder:
                     (_, Animation<double> animation, __, Widget child) {

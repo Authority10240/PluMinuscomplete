@@ -218,7 +218,7 @@ class _ExpansionTileReviewState extends State<ExpansionTileReview> with SingleTi
     _borderColorTween
       ..end = theme.dividerColor;
     _headerColorTween
-      ..begin = theme.textTheme.subhead.color
+      ..begin = theme.textTheme.bodyText1.color
       ..end = theme.accentColor;
     _iconColorTween
       ..begin = theme.unselectedWidgetColor

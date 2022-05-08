@@ -312,7 +312,7 @@ class _BankCreateState extends State<BankCreate> {
 
   bool validateCard(){
     bool isValid = false;
-    if(gm.bankModel.cardNumber.toString().length < 12 || gm.bankModel.cardNumber> 8){
+    if(gm.bankModel.cardNumber.toString().length < 12 || gm.bankModel.cardNumber.toString().length> 8){
       isValid = true;
     }
 

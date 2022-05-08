@@ -19,40 +19,31 @@ class _SecurityQuestionsState extends State<SecurityQuestions> {
   Widget build(BuildContext context) {
     return Scaffold(appBar:
     AppBar(
-      title: CircleAvatar(backgroundColor: Colors.red),
-      centerTitle: true,
       backgroundColor: Colors.white,),
-      body: ListView(
-        children: [
-          Container(
-            padding: EdgeInsets.all(30),
-
-
-
-                    child:Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      child:  Container(padding: EdgeInsets.all(20),
-
-                        child: Expanded(flex: 2,
-                          child: Text(
-                            'Enter 3 password recovery Words',
-                            style: _fontTextStyle,
-                            textAlign: TextAlign.center,maxLines: 5,),),
-                      ),)
-
-
-          ),
-          textFromField('First Word', Icons.title, 1),
+       body: ListView(
+          children: [
+            Container(
+                padding: EdgeInsets.all(30),
+                child:Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  child:  Container(padding: EdgeInsets.all(20),
+                      child: Text(
+                        'Enter 3 password recovery Words',
+                        style: _fontTextStyle,
+                        textAlign: TextAlign.center,maxLines: 5,),
+                  ),)
+            ),
+             textFromField('First Word', Icons.title, 1),
           SizedBox(height: 10,),
           textFromField('Second Word', Icons.title, 2),
           SizedBox(height: 10,),
           textFromField('Third Word', Icons.title, 3),
           SizedBox(height: 20,),
-          GestureDetector(onTap: () {
+             GestureDetector(onTap: () {
             saveRecoveryWords();
           }, child:
-          Container(decoration: BoxDecoration(
+         Container(decoration: BoxDecoration(
               color: Colors.grey, borderRadius: BorderRadius.circular(10)),
             padding: EdgeInsets.only(bottom: 10, left: 20, right: 20, top: 10,),
             margin: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 100),
@@ -62,8 +53,9 @@ class _SecurityQuestionsState extends State<SecurityQuestions> {
                 Text('Finish   ', style: TextStyle(color: Colors.white),)
               ],
             ),),),
-        ],
-      ),);
+          ],
+        ),
+      );
   }
 
   var _fontTextStyle = TextStyle(
@@ -99,7 +91,6 @@ class _SecurityQuestionsState extends State<SecurityQuestions> {
             hintColor: Colors.transparent,
           ),
           child: TextField(
-
             decoration: InputDecoration(
                 border: InputBorder.none,
                 labelText: email,
@@ -113,8 +104,6 @@ class _SecurityQuestionsState extends State<SecurityQuestions> {
                     letterSpacing: 0.3,
                     color: Colors.black38,
                     fontWeight: FontWeight.w600)),
-
-
             onChanged: (value) async {
                 switch (textFieldNumber) {
                   case 1:

@@ -6,16 +6,20 @@ import 'package:treva_shop_flutter/UI/HomeUIComponent/BalanceTable.dart';
 
 class BalanceCard extends StatefulWidget {
   @override
-  _BalanceCardState createState() => _BalanceCardState(year , month);
+  _BalanceCardState createState() => _BalanceCardState(year , month, transaction: this.transaction, type: this.type);
   String year="", month="";
-  BalanceCard(this.year,  this.month);
+  bool transaction;
+  int type;
+  BalanceCard(this.year,  this.month, {this.transaction, this.type});
 }
 
 class _BalanceCardState extends State<BalanceCard> {
   @override
   String year= "" , month="", Department="" , name='';
   DatabaseReference ref;
-  _BalanceCardState(this.year, this.month);
+  bool transaction;
+  int type;
+  _BalanceCardState(this.year, this.month, {this.transaction, this.type});
   List<String> cards, names , departments;
 
   Widget build(BuildContext context) {
@@ -32,7 +36,10 @@ class _BalanceCardState extends State<BalanceCard> {
           child:ListTile(leading: CircleAvatar(backgroundColor: Colors.grey,
             child: Text(names[i][0], style: TextStyle(color: Colors.white),),),title: Text(names[i], style: TextStyle(),),subtitle:Text(cards[i], style: TextStyle()) ,
               onTap:(){
-              Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => new BalanceSheet(year,month,cards[i],names[i],departments[i])) );
+              Navigator.pushReplacement(context,MaterialPageRoute(
+                  builder: (context) => new BalanceSheet(year,month,cards[i]
+                    ,names[i],departments[i], transaction: this.transaction,
+                      type: this.type)) );
             },) );
       }, itemCount: cards.length,),  
     );
