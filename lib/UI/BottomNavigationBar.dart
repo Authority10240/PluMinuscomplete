@@ -91,7 +91,7 @@ _bottomNavigationBarState(this.currentIndex);
          BottomNavigationBarItem(
              icon: Icon(Icons.autorenew),
              title: Text(
-              "Transactions",
+              "Documents",
               style: TextStyle( letterSpacing: 0.5),
              )),
          BottomNavigationBarItem(

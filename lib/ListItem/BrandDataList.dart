@@ -33,7 +33,7 @@ class items {
 
 List<Brand> brandData = [
   const Brand(
-      name: "View Statements",
+      name: "View receipts/payments",
       id: "1",
       img: "assets/imgBrand/transactionIn.jpg",
       desc:" List of all Deposits",

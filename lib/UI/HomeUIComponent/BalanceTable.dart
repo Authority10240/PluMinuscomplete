@@ -452,9 +452,9 @@ ListView getTableRows(){
           int reverseIndex = index;
 
           if(request[reverseIndex].TRANSACTION_TYPE == "A") {
-            amount = double.parse(request[reverseIndex].ACTUAL_AMOUNT_PAID);
-          }else if(request[reverseIndex].TRANSACTION_TYPE == "F") {
             amount = double.parse(request[reverseIndex].ACTUAL_AMOUNT);
+          }else if(request[reverseIndex].TRANSACTION_TYPE == "F") {
+            amount = double.parse(request[reverseIndex].ACTUAL_AMOUNT_PAID);
           }
           if(request[reverseIndex].TRANSACTION_TYPE == "A") {
             return this.transaction == false? Card(child: ListTile(
@@ -477,8 +477,7 @@ ListView getTableRows(){
                 style: TextStyle(fontSize: 12),),
               trailing: Text("Date:${request[reverseIndex].date} \n"
                   "Available amount: R${request[reverseIndex].AVAILABLE_BALANCE}"
-                  ,
-                  style: TextStyle(fontSize: 12)),
+                  , style: TextStyle(fontSize: 12)),
               subtitle: Text("-R${amount}0", style: TextStyle(fontSize: 12)),
 
             )) :Card(child: ListTile(
@@ -590,7 +589,7 @@ CreateCSVFile() async{
         :
           amount = double.parse(request[i].ACTUAL_AMOUNT_PAID);
 
-      row.add(request[i].ACTUAL_AMOUNT_DATE);
+      row.add(request[i].date);
       row.add(request[i].Title);
       row.add(amount.toString());
       row.add(request[i].AVAILABLE_BALANCE);

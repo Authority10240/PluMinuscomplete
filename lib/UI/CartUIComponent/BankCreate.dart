@@ -302,7 +302,7 @@ class _BankCreateState extends State<BankCreate> {
           .child(DateTime.now().year.toString()).child(DateTime.now().month.toString()).child('${gm.bankModel.cardNumber}_${gm.groupDepartment}_${gm.groupName}');
       refFee.child(getDateTime()+req.Title).set(req.toMap());
 
-      BankCreated(context, 'Group Creation','Group Creation Succesful' ,gm);
+      BankCreated(context, 'Group Creation','Group Creation Successful' ,gm);
 
   }
 
@@ -425,6 +425,7 @@ class textFromField extends StatelessWidget {
 
                 case 5:
                   gm.bankModel.accountBalance = value;
+
 
 
               }
