@@ -253,7 +253,8 @@ double getVatTotal(Request request){
 
 
     ref.onChildAdded.listen((group) {
-      if(Request.FromFirebaseMap(group.snapshot.value).STATUS != "ARCHIVED") {
+      if(Request.FromFirebaseMap(group.snapshot.value).STATUS != "ARCHIVED"
+      || Request.FromFirebaseMap(group.snapshot.value).STATUS != "DECLINED") {
         request.add(Request.FromFirebaseMap(group.snapshot.value));
         request.last.DEPARTMENT = gi.DEPARTMENT;
         request.last.GROUP_NAME = gi.GROUP_NAME;

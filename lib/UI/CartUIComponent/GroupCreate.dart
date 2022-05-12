@@ -33,7 +33,6 @@ class _GroupCreateState extends State<GroupCreate> {
       appBar: AppBar(
         centerTitle: true,backgroundColor: Colors.grey,
         title: Text('Create Group',style: TextStyle(color: Colors.white),),
-
       ),
       body: ListView(
         children: <Widget>[
@@ -72,7 +71,6 @@ class _GroupCreateState extends State<GroupCreate> {
           ),
           SizedBox(height: 10,),
           textFromField(
-
             icon: Icons.blur_linear,
             password: false,
             email: "Confirm Password*",
@@ -80,15 +78,9 @@ class _GroupCreateState extends State<GroupCreate> {
             textFieldNumber: 4,
             gm: gm,
           ),
-
-
-
-
-
-          SizedBox(height: 10,),
-
-          SizedBox(height: 10,),
-          Container( padding: EdgeInsets.all(20),child:FlatButton(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          SizedBox(height: 20,),
+          Container( padding: EdgeInsets.all(20),child:FlatButton(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               padding: EdgeInsets.symmetric( horizontal:30.0),
               onPressed: () {
                 validateValues();
@@ -102,8 +94,6 @@ class _GroupCreateState extends State<GroupCreate> {
                     ),
               ),
           color: Colors.grey,),)
-
-
         ],
 
       ),
@@ -111,11 +101,8 @@ class _GroupCreateState extends State<GroupCreate> {
   }
 
   bool validateValues(){
-
     populateAdminDetails();
     if(validateFields()){
-
-
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (BuildContext context) => new BankCreate(gm)));
 
@@ -277,7 +264,6 @@ Confirm(BuildContext context, String title,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-
           title: Text(title,),
           elevation: 7.0,
           shape: RoundedRectangleBorder(

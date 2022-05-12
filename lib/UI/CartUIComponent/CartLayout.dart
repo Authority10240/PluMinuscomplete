@@ -96,7 +96,7 @@ class _cartState extends State<cart> {
 
              ],
             title: Text(
-              "Groups",
+              "",
               style: TextStyle(
                   fontFamily: "Gotik",
                   fontSize: 20.0,

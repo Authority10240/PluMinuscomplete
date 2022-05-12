@@ -140,8 +140,6 @@ class _BankCreateState extends State<BankCreate> {
       setState(() {
 
       });
-
-
     });
     String url = downURL.toString();
     rq.proofOfPaynent = url;
@@ -271,7 +269,7 @@ class _BankCreateState extends State<BankCreate> {
           .child('GROUPS').child(StaticValues.splitEmailForFirebase(gm.groupAdmin.memberEmployeeNumber)).child(gm.groupName).child(gm.groupDepartment).child('ADMIN_MODEL');
       ref.set(gm.toAdminMap(gm));
 
-      db_helper.addNewGroup(GROUP_INFORMATION(gm.groupDepartment, gm.groupName, StaticValues.splitEmailForFirebase(gm.groupAdmin.memberEmployeeNumber),'GR'));
+     // db_helper.addNewGroup(GROUP_INFORMATION(gm.groupDepartment, gm.groupName, StaticValues.splitEmailForFirebase(gm.groupAdmin.memberEmployeeNumber),'GR'));
       ///adds the creator of the group as a member of the group.
       ref = FirebaseDatabase.instance.reference().child('THIS_COMPANY').child('GROUPS').child(StaticValues.splitEmailForFirebase(gm.groupAdmin.memberEmployeeNumber))
           .child(gm.groupName).child(gm.groupDepartment).child('MEMBERS').child(StaticValues.splitEmailForFirebase(StaticValues.employeeNumber));

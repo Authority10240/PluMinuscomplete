@@ -185,25 +185,28 @@ class _Group_requestsState extends State<Group_requests> {
 
                 onChanged:(value){
                   req.ACTUAL_AMOUNT = value;
+                  req.ACTUAL_AMOUNT_PAID = value;
                   ref.child(req.Title).child('INFORMATION').update({'ACTUAL_AMOUNT':value,
                   'ACTUAL_AMOUNT_DATE': getDate()});
                   refUser.child(req.Title).child('INFORMATION').update({'ACTUAL_AMOUNT':value,
                     'ACTUAL_AMOUNT_DATE': getDate()});
                 },
               ),
-            FlatButton(onPressed: (){
-
-              saveInHistory(req,"F");
-              UpdateStatus(req);
-              updateActualAmount(req);
-              updateBalance(req, "${double.parse(req.AVAILABLE_BALANCE) - double.parse(req.ACTUAL_AMOUNT)}",minus: true);
-              Navigator.pop(context);
-              setState(() {
-              });
+            FlatButton(
+                onPressed: (){
+                  saveInHistory(req,"F");
+                  UpdateStatus(req);
+                  updateActualAmount(req);
+                  updateBalance(req, "${double.parse(req.ACTUAL_AMOUNT)}",minus: true);
+                  Navigator.pop(context);
+                  setState(() {
+                    });
             }, child: Text('Save', style: TextStyle(color: Colors.black),))
-            ],),),);
-
-        });
+            ],
+          ),
+        ),
+      );
+    });
   }
 
   String getDateTime(){
@@ -474,7 +477,7 @@ class _Group_requestsState extends State<Group_requests> {
         .child('GROUPS').child(StaticValues.splitEmailForFirebase(list.GROUP_ADMIN)).child(list.GROUP_NAME).child(list.DEPARTMENT).child('BANK_MODEL');
       refMain.update({
         'ACCOUNT_BALANCE': minus?
-        (double.parse(entered) - double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
+        (  double.parse(list.AVAILABLE_BALANCE) - double.parse(entered)).toStringAsFixed(2)
             :
         (double.parse(entered) + double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
       });
@@ -491,10 +494,10 @@ class _Group_requestsState extends State<Group_requests> {
         ,'ACTUAL_AMOUNT_PAID':double.parse(entered).toStringAsFixed(2)});
         list.ACTUAL_AMOUNT_PAID = double.parse(entered).toStringAsFixed(2);
         list.AVAILABLE_BALANCE = minus?
-        (double.parse(entered) - double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2)
+        ( double.parse(list.AVAILABLE_BALANCE) - double.parse(entered) ).toStringAsFixed(2)
           :
         (double.parse(entered) + double.parse(list.AVAILABLE_BALANCE)).toStringAsFixed(2);
-      saveInHistory(list,"A");
+      saveInHistory(list,minus?"F":"A");
       setState(() {
         Navigator.pop(context);
         uploadOption(list);
