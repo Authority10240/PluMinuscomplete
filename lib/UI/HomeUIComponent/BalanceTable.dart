@@ -370,12 +370,10 @@ class _BalanceSheetState extends State<BalanceSheet> {
   CreateFee(BuildContext context) {
     String amount='' ;
     return showDialog(
-
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-
             title: Text('Add Banking Fee.',),
             elevation: 7.0,
             shape: RoundedRectangleBorder(
@@ -384,7 +382,6 @@ class _BalanceSheetState extends State<BalanceSheet> {
               child: ListBody(
                 children: <Widget>[
                   Text('Enter Fee Name'),
-
                   SizedBox(height: 5,),
                   textFormField('Reference', 3,TextInputType.text,9),
                   SizedBox(height: 10,),
@@ -666,7 +663,7 @@ String getDateTime(){
 
       ref = FirebaseDatabase.instance.reference()
           .child('THIS_COMPANY').child('STATEMENTS').child(StaticValues.splitEmailForFirebase(StaticValues.employeeNumber))
-          .child(year).child(month).child('${card}_${department}_${name}');
+          .child(year).child(month).child('${card}_${department}_${name}').orderByChild('ORDER_DATE');
       ref.onChildAdded.listen((data){
         var req = data.snapshot.value;
         if(!request.contains(req)) {

@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06d3194b-0afd-42a6-938c-8da15571541f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
@@ -13,10 +12,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/UI/CartUIComponent/BankCreate.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/UI/CartUIComponent/BankCreate.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/UI/CartUIComponent/GroupCreate.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/UI/CartUIComponent/GroupCreate.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/UI/CartUIComponent/GroupRequests.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/UI/CartUIComponent/GroupRequests.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/UI/HomeUIComponent/Requests.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/UI/HomeUIComponent/Requests.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/DataModels/Request.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/DataModels/Request.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/UI/HomeUIComponent/BalanceTable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/UI/HomeUIComponent/BalanceTable.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

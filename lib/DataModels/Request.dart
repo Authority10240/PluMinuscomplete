@@ -10,6 +10,7 @@ class Request{
   TRANSACTION_TYPE = "", ACTUAL_AMOUNT_PAID="0.00";
   List<Items> items = [];
   Request();
+  DateTime ORDER_DATE;
 
   Request.FromMap(String name,var map , String type){
     Map info ;
@@ -46,6 +47,9 @@ class Request{
     TRANSACTION_TYPE = info['TRANSACTION_TYPE'];
     ACTUAL_AMOUNT_PAID = info['ACTUAL_AMOUNT_PAID'];
     Title = info['TITLE'];
+    ORDER_DATE = info['ODER_DATE'];
+
+
 
     List<dynamic> check;
     if(type == 'T'){
@@ -83,6 +87,7 @@ class Request{
     GROUP_NAME = info['GROUP_NAME'];
     GROUP_ADMIN = info['GROUP_ADMIN'];
     TRANSACTION_TYPE = info['TRANSACTION_TYPE'];
+    ORDER_DATE = info['ODER_DATE'];
   }
 
   Request.FromFirebaseMap(var map){
@@ -110,6 +115,7 @@ class Request{
     DEPARTMENT = info['DEPARTMENT'];
     GROUP_NAME = info['GROUP_NAME'];
     GROUP_ADMIN = info['GROUP_ADMIN'];
+    ORDER_DATE = info['ODER_DATE'];
     List<dynamic> check = map.values.elementAt(1);
 
     for( int i = 0 ; i < check.length; i++)
@@ -143,6 +149,7 @@ class Request{
     map['GROUP_ADMIN'] = GROUP_ADMIN;
     map['TRANSACTION_TYPE']  = TRANSACTION_TYPE;
     map['ACTUAL_AMOUNT_PAID']= ACTUAL_AMOUNT_PAID  ;
+    map['ORDER_DATE'] = DateTime.now();
 
     return map;
   }
