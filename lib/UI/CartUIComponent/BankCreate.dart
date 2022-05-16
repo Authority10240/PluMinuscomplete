@@ -236,13 +236,13 @@ class _BankCreateState extends State<BankCreate> {
   createInitial(){
     Request req = Request();
     req.TRANSACTION_TYPE = 'A';
-    req.AVAILABLE_BALANCE = gm.bankModel.accountBalance;
+    req.AVAILABLE_BALANCE = double.parse(gm.bankModel.accountBalance).toStringAsFixed(2);
     req.REQUESTED_AMOUNT = gm.bankModel.accountBalance;
     req.GROUP_ADMIN = StaticValues.employeeNumber;
     req.REQUESTER = "BANK";
     req.ACTUAL_AMOUNT_DATE = getDate();
     req.Title = "Opening Balance";
-    req.ACTUAL_AMOUNT = gm.bankModel.accountBalance;
+    req.ACTUAL_AMOUNT = double.parse(gm.bankModel.accountBalance).toStringAsFixed(2);
     req.date = getDate();
     uploadOption(req);
 
@@ -423,9 +423,6 @@ class textFromField extends StatelessWidget {
 
                 case 5:
                   gm.bankModel.accountBalance = value;
-
-
-
               }
 
 

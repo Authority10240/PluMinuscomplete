@@ -141,28 +141,56 @@ class _cartState extends State<cart> {
                 actions: <Widget>[
                   new IconSlideAction(
                     key: Key('Key'),
-                    caption: 'Send Invite',
+                    caption: 'Delete',
                     color: Colors.grey,
                     icon: Icons.email,
                     onTap: () async {
-                      if(groups[position].GROUP_ADMIN == StaticValues.splitEmailForFirebase(StaticValues.employeeNumber)){
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => new InvitePage(
-                              groups2[position]),),);
-                      }else {
+                      return showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+
+                              title: Text('Delete Group ${groups2[position].groupModel.groupName}'),
+                              elevation: 7.0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(10))),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: <Widget>[
+                                    Text('Are you sure you want to delete the following group: '
+                                        '${groups2[position].groupModel.groupName} \n'
+                                        'You will have to '
+                                        '${groups[position].GROUP_ADMIN == StaticValues.splitEmailForFirebase(StaticValues.employeeNumber)
+                                ? "recreate" : "rejoin"}'
+                                         "the group to gain access again. "),
+                                  ],
+                                ),
+                              ),
+                              actions: <Widget>[
+
+                                FlatButton(
+                                  child: Text('Clear', style: TextStyle(color: Colors.black)),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      items.clear();
+                                    });
 
 
-                        Fluttertoast.showToast(
-                            msg: "This functionality is reserved for administrative use only.",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.grey,
-                            textColor: Colors.white,
-                            fontSize: 16.0
-                        );
-                      }
 
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text('Cancel', style: TextStyle(color: Colors.black)),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            );
+                          }
+                      );
 
                     },
                   ),

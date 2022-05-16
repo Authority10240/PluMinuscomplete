@@ -419,7 +419,7 @@ class _Group_requestsState extends State<Group_requests> {
             Text('The Selected account has insufficient funds to approve the requested items(s) \n'
                 'Therefore to continue with the transaction, kindly refurbish the account with atleast the minimum amount required below:'
                 '\n'
-                'Minimum amount Required: \nR${(double.parse(list.AVAILABLE_BALANCE) - getTotal(list)).toStringAsFixed(2) }'),
+                'Amount overdue: \nR${(double.parse(list.AVAILABLE_BALANCE) - getTotal(list)).toStringAsFixed(2) }'),
             TextField(
               keyboardType: TextInputType.number,
               onChanged:(value){
@@ -450,7 +450,6 @@ class _Group_requestsState extends State<Group_requests> {
             //add the amount put into the textfield
           }, child: Text('Add Amount')),
           FlatButton(onPressed: (){
-            updateBalance(list, getTotal(list).toString());
             //add the requested amount
           }, child: Text('Add Requested Amount')),
 
@@ -466,7 +465,6 @@ class _Group_requestsState extends State<Group_requests> {
     refMain.update({
       'ACCOUNT_BALANCE': (double.parse(req.AVAILABLE_BALANCE) - double.parse(req.ACTUAL_AMOUNT)).toStringAsFixed(2)
     });
-
     setState(() {
 
     });
@@ -569,7 +567,7 @@ class _Group_requestsState extends State<Group_requests> {
       );
     });
     String url = downURL.toString();
-    UpdatePOP(url,rq);
+    updateBalance(rq, getTotal(rq).toString());
     setState(() {
       Navigator.pop(context);
     });

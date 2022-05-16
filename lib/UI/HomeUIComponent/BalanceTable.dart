@@ -461,11 +461,19 @@ ListView getTableRows(){
                   "Available amount: R${request[reverseIndex].AVAILABLE_BALANCE}",
                   style: TextStyle(fontSize: 12)),
               subtitle: Text("R${amount}0", style: TextStyle(fontSize: 12)),
-            )): Card(child: ListTile(
-              leading: Text("Date \n${request[reverseIndex].date}"),
-              title: Text("Transaction \n${request[reverseIndex].Title}"),
-              trailing: FlatButton( onPressed: ()=> downloadFile(request[reverseIndex].proofOfPaynent,
-                  "${request[reverseIndex].Title} - ${request[reverseIndex].date}")  ,child: Card(child:  Container(padding: EdgeInsets.all(10),child: Text("Download Reciept")),)),),
+            )): Card(child: Column(
+              children: [
+                Container(padding: EdgeInsets.all(10),child: Center(child:Text("Transaction: \n${request[reverseIndex].Title}"),),),
+                ListTile(
+                  leading: Text("Date \n${request[reverseIndex].date}"),
+                  trailing: Column(
+                    children: [
+                      FlatButton( onPressed: ()=> downloadFile(request[reverseIndex].proofOfPaynent,
+                          "${request[reverseIndex].Title} - ${request[reverseIndex].date}")  ,child: Card(child:  Container(padding: EdgeInsets.all(10),child: Text("Download Reciept")),)),
+                    ],
+                  ),),
+              ],
+            ),
             );
           }else{
 
@@ -477,12 +485,16 @@ ListView getTableRows(){
                   , style: TextStyle(fontSize: 12)),
               subtitle: Text("-R${amount}0", style: TextStyle(fontSize: 12)),
 
-            )) :Card(child: ListTile(
-              leading: Text("Date \n${request[reverseIndex].date}"),
-              title: Text("Transaction \n${request[reverseIndex].Title}"),
-              trailing: FlatButton(onPressed:()=> downloadFile(request[reverseIndex].proofOfPaynent ,
-                  "${request[reverseIndex].Title} - ${request[reverseIndex].date}"
-              ), child: Card(child:  Container(padding: EdgeInsets.all(10),child: Text("Download P.O.P")),)),),
+            )) :Card(child: Column(
+              children: [
+                Container(padding: EdgeInsets.all(10),child: Center(child:Text("Transaction: \n${request[reverseIndex].Title}"),),),
+                ListTile(
+                  leading: Text("Date \n${request[reverseIndex].date}"),
+                  trailing: FlatButton(onPressed:()=> downloadFile(request[reverseIndex].proofOfPaynent ,
+                      "${request[reverseIndex].Title} - ${request[reverseIndex].date}"
+                  ), child: Card(child:  Container(padding: EdgeInsets.all(10),child: Text("Download Statement")),)),),
+              ],
+            ),
             );
           }
         },);
@@ -659,17 +671,16 @@ String getDateTime(){
 }
   updateListView()async{
     groups = await dbHelper.getGroupList('');
-
-
       ref = FirebaseDatabase.instance.reference()
           .child('THIS_COMPANY').child('STATEMENTS').child(StaticValues.splitEmailForFirebase(StaticValues.employeeNumber))
-          .child(year).child(month).child('${card}_${department}_${name}').orderByChild('ORDER_DATE');
+          .child(year).child(month).child('${card}_${department}_${name}');
       ref.onChildAdded.listen((data){
         var req = data.snapshot.value;
         if(!request.contains(req)) {
           request.add(Request.Statement(req));
           setState(() {
-
+            if(request.length > 1)
+              request.sort((a,b) => a.ORDER_DATE.compareTo(b.ORDER_DATE));
           });
         }
       });
