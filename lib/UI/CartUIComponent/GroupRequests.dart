@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:intl/intl.dart';
 import 'package:treva_shop_flutter/BackEnd/DBHelper.dart';
 import 'package:treva_shop_flutter/DataModels/GROUP_INFORMATION.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -210,11 +211,11 @@ class _Group_requestsState extends State<Group_requests> {
   }
 
   String getDateTime(){
-    return "${DateTime.now().year}_${DateTime.now().month}_${DateTime.now().day} ${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}";
+    return DateFormat("yyyy_MM_dd HH:mm:ss").format(DateTime.now()).toString();
   }
 
   String getDate(){
-    return "${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}}";
+    return DateFormat("yyyy_MM_dd").format(DateTime.now()).toString();
   }
 
   saveInHistory(Request req,String TT){
